@@ -210,16 +210,7 @@ The script loads a trained checkpoint and saves result images in `test_result`, 
 - Improve inference speed and error handling.
 - Add automated tests and deployment configuration.
 
-## Team Members
 
-The current team page lists:
-
-- Subiya Anjum — Model Development
-- Saniya Tahseen — Backend & Integration
-- Sonu — Frontend & UX
-- Suhana — Testing & Documentation
-
-Replace placeholder USNs in `backend/app.py` with the correct values before submission.
 
 ## Academic Use
 
