@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}AI Studio — Camouflage Vision{% endblock %}
+{% block content %}
+<section class="page-hero studio-hero"><div class="eyebrow"><span class="eyebrow-dot"></span> MODEL INTERFACE </div><h1><span class="gradient-text">OUTPUT.</span></h1><p>Upload an image or use your camera. Run the trained segmentation model and inspect the predicted mask.</p><div class="model-pill"><i class="status-pip"></i>{{ 'MODEL LOADED · CPU INFERENCE' if model_ready else 'MODEL NOT AVAILABLE' }}</div></section>
+{% if error %}<div class="alert">{{ error }}</div>{% endif %}
+<section class="studio-layout">
+  <div class="glass-panel input-panel">
+    <div class="panel-heading"><span class="step"> IMAGE INPUT</span><span class="tiny-badge">MAX 12 MB</span></div>
+    <form method="post" enctype="multipart/form-data" id="upload-form">
+      <label class="upload-zone" for="image-input" id="upload-zone"><input id="image-input" name="image" type="file" accept="image/png,image/jpeg,image/webp" required><span class="upload-symbol">↑</span><strong id="upload-title">Drop image to analyze</strong><span>or browse your device</span><img id="local-preview" hidden alt="Selected image preview"><span id="selected-file" class="selected-file"></span></label>
+      <button class="button button-primary full-button" type="submit" {% if not model_ready %}disabled{% endif %}>Run segmentation <span>↗</span></button>
+    </form>
+    <div class="or-divider"><span>OR USE YOUR CAMERA</span></div>
+    <div class="camera-box"><video id="camera-video" autoplay playsinline muted></video><canvas id="camera-canvas" hidden></canvas><div class="camera-placeholder" id="camera-placeholder"><span>◎</span><strong>Live capture</strong><small>Camera access stays in your browser.</small></div></div>
+    <div class="camera-controls"><button class="button button-ghost small-button" id="start-camera" type="button">Start camera</button><button class="button button-ghost small-button" id="stop-camera" type="button" disabled>Stop camera</button><button class="button button-primary small-button" id="capture-frame" type="button" disabled>Capture & predict</button></div>
+    <p class="micro-copy" id="camera-status">Camera is off. Start camera to enable live capture.</p>
+  </div>
+  <div class="output-panel">
+    <div class="panel-heading output-heading"><span class="step">PREDICTION OUTPUT</span><span class="tiny-badge"></span></div>
+    {% if result %}
+    <div class="results-view">
+      <div class="result-image-card"><div class="image-title"><span>INPUT</span><b>Original image</b></div><img src="{{ result.original }}" alt="Original image"><a download="original.png" href="{{ result.original }}">Download ↧</a></div>
+      <div class="result-image-card featured-result"><div class="image-title"><span>MASK</span><b>Predicted segmentation</b></div><img src="{{ result.mask }}" alt="Predicted segmentation mask"><a download="predicted-mask.png" href="{{ result.mask }}">Download ↧</a></div>
+      <div class="result-image-card"><div class="image-title"><span>OVERLAY</span><b>Mask + original</b></div><img src="{{ result.overlay }}" alt="Overlay visualization"><a download="segmentation-overlay.png" href="{{ result.overlay }}">Download ↧</a></div>
+    </div>
+    <div class="distribution glass-panel"><div class="panel-heading"><span class="step">CLASS DISTRIBUTION</span><span class="tiny-badge">{{ result.width }} × {{ result.height }}</span></div>
+    {% for stat in result.stats %}<div class="distribution-row"><span class="legend-dot" style="background:{{ stat.color }}" ></span><span class="distribution-name">{{ stat.name }}</span><div class="distribution-track"><i style="width:{{ stat.percent }}%;background:{{ stat.color }}"></i></div><strong>{{ stat.percent }}%</strong></div>{% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-output glass-panel"><div class="empty-art"><div class="empty-orbit"></div><div class="empty-diamond">◈</div><span>MASK PREVIEW</span></div><h2>Your results will appear here.</h2><p>Upload an image or capture a camera frame to see the original, predicted mask, overlay, and class distribution.</p><div class="empty-steps"><span>01 Upload</span><i>→</i><span>02 Predict</span><i>→</i><span>03 Explore</span></div></div>
+    {% endif %}
+    <div id="live-results" class="live-results" hidden><div class="live-result-header"><span class="step">LIVE FRAME RESULT</span><span class="tiny-badge">CAMERA</span></div><div class="results-view"><div class="result-image-card"><div class="image-title"><span>INPUT</span><b>Captured frame</b></div><img id="live-original" alt="Captured frame"><a id="download-live-original" download="camera-frame.png">Download ↧</a></div><div class="result-image-card featured-result"><div class="image-title"><span>MASK</span><b>Predicted segmentation</b></div><img id="live-mask" alt="Live predicted mask"><a id="download-live-mask" download="camera-mask.png">Download ↧</a></div><div class="result-image-card"><div class="image-title"><span>OVERLAY</span><b>Mask + frame</b></div><img id="live-overlay" alt="Live segmentation overlay"><a id="download-live-overlay" download="camera-overlay.png">Download ↧</a></div></div><div class="distribution glass-panel" id="live-stats"></div></div>
+    <p class="micro-copy output-note">Predictions are model estimates. Best results require preprocessing identical to training.</p>
+  </div>
+</section>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/studio.js') }}"></script>
+{% endblock %}

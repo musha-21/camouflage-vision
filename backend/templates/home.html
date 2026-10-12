@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Camouflage Vision — Reveal the unseen{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="hero-copy">
+    <div class="eyebrow"><span class="eyebrow-dot"></span> DEEP LEARNING / COMPUTER VISION</div>
+    <h1>Reveal what<br>hides in <span class="gradient-text">plain sight.</span></h1>
+    <p class="hero-lede">A Camouflaged object segmentation system built to discover hidden animal regions in complex natural scenes.</p>
+    <div class="hero-actions"><a class="button button-primary" href="{{ url_for('detect') }}">Start detection <span>↗</span></a><a class="button button-ghost" href="{{ url_for('about') }}">Explore the project <span>→</span></a></div>
+    <div class="hero-meta"><span class="status-pip"></span> <span>U-Net architecture</span><i></i><span>ResNet18 encoder</span><i></i><span>4-class segmentation</span></div>
+  </div>
+  <div class="hero-visual" aria-label="Abstract 3D segmentation visual">
+    <div class="orbit orbit-a"></div><div class="orbit orbit-b"></div><div class="orbit orbit-c"></div>
+    <div class="orb-core"><div class="orb-inner"><span class="orb-eye"></span><span class="orb-line"></span><span class="orb-label">PIXEL<br>INTELLIGENCE</span></div></div>
+    <div class="float-chip chip-top"><span class="chip-icon">◈</span><span><small>MODEL STATUS</small><strong>{{ 'Ready for inference' if model_ready else 'Checkpoint unavailable' }}</strong></span></div>
+    <div class="float-chip chip-bottom"><span class="mini-bars"><i></i><i></i><i></i><i></i><i></i></span><span><small>SEGMENTATION ENGINE</small><strong>UNet / ResNet18</strong></span></div>
+    <div class="visual-cross cross-one">+</div><div class="visual-cross cross-two">+</div>
+  </div>
+  <div class="hero-scroll"><span></span> SCROLL TO EXPLORE</div>
+</section>
+
+<section class="stats-strip">
+  <div><span class="stat-number">01</span><span class="stat-label">Pixel-level<br>understanding</span></div>
+  <div><span class="stat-number">04</span><span class="stat-label">Semantic<br>classes</span></div>
+  <div><span class="stat-number">AI</span><span class="stat-label">Deep learning<br>inference</span></div>
+  <div><span class="stat-number">∞</span><span class="stat-label">Scenes to<br>investigate</span></div>
+</section>
+
+<section class="section-block">
+  <div class="section-heading"><div><span class="eyebrow">THE CHALLENGE</span><h2>When nature makes<br><span class="gradient-text">hiding an art.</span></h2></div><p>Camouflaged animals blend into their environment through similar colors, textures, and shapes. Our project explores how deep learning can separate the subject from its surroundings at pixel level.</p></div>
+  <div class="feature-grid">
+    <article class="glass-card feature-card tilt-card"><div class="feature-icon cyan">⌗</div><span class="card-index">01 / PERCEPTION</span><h3>Pixel-level perception</h3><p>Predicts a semantic class for each pixel instead of returning only a bounding box.</p><div class="card-line"></div></article>
+    <article class="glass-card feature-card tilt-card"><div class="feature-icon purple">◉</div><span class="card-index">02 / SEGMENTATION</span><h3>Multi-class masks</h3><p>Visualizes animal and background-related classes with a consistent color-coded mask.</p><div class="card-line"></div></article>
+    <article class="glass-card feature-card tilt-card"><div class="feature-icon blue">⟲</div><span class="card-index">03 / INTERACTION</span><h3>Interactive </h3><p>Upload an image, compare the prediction and overlay, and download your results.</p><div class="card-line"></div></article>
+  </div>
+</section>
+
+<section class="architecture-band">
+  <div><span class="eyebrow">UNDER THE HOOD</span><h2>From raw pixels<br>to <span class="gradient-text">learned insight.</span></h2><p>The trained U-Net combines a ResNet18 encoder with a decoder that reconstructs spatial details for semantic segmentation.</p><a class="text-link" href="{{ url_for('about') }}">Explore methodology <span>↗</span></a></div>
+  <div class="pipeline">
+    <div class="pipeline-node"><span class="node-symbol">▧</span><small>INPUT</small><strong>Image</strong></div><div class="pipeline-arrow">⟶</div>
+    <div class="pipeline-node node-accent"><span class="node-symbol">⌘</span><small>ENCODER</small><strong>ResNet18</strong></div><div class="pipeline-arrow">⟶</div>
+    <div class="pipeline-node node-purple"><span class="node-symbol">◫</span><small>DECODER</small><strong>U-Net</strong></div><div class="pipeline-arrow">⟶</div>
+    <div class="pipeline-node node-result"><span class="node-symbol">▦</span><small>OUTPUT</small><strong>Mask</strong></div>
+  </div>
+</section>
+
+<section class="bottom-cta"><div class="cta-glow"></div><span class="eyebrow">READY TO EXPLORE?</span><h2>Bring an image.<br><span class="gradient-text">Reveal the hidden.</span></h2><p>Test the current model with your own wildlife or nature image.</p><a class="button button-primary" href="{{ url_for('detect') }}">RUN <span>↗</span></a></section>
+{% endblock %}

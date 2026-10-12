@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080b18">
+  <title>{% block title %}Camouflage Vision{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  {% block head %}{% endblock %}
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <nav class="navbar">
+    <a class="brand" href="{{ url_for('home') }}"><span class="brand-mark"><span></span><span></span><span></span></span><span>CAMOUFLAGE<span class="brand-light">VISION</span></span></a>
+    <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation">☰</button>
+    <div class="nav-links" id="nav-links">
+      <a class="{{ 'active' if page == 'home' else '' }}" href="{{ url_for('home') }}">Home</a>
+      <a class="{{ 'active' if page == 'about' else '' }}" href="{{ url_for('about') }}">About project</a>
+      <a class="{{ 'active' if page == 'team' else '' }}" href="{{ url_for('team') }}">Team</a>
+      <a class="{{ 'active' if page == 'detect' else '' }}" href="{{ url_for('detect') }}">OUTPUT</a>
+    </div>
+    <a class="nav-cta" href="{{ url_for('detect') }}">RUN <span>↗</span></a>
+  </nav>
+
+  <main class="page-shell">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="footer">
+    <a class="brand footer-brand" href="{{ url_for('home') }}"><span class="brand-mark"><span></span><span></span><span></span></span><span>CAMOUFLAGE<span class="brand-light">VISION</span></span></a>
+    <p>Seeing the unseen through deep learning.</p>
+    <span class="footer-tech">PYTORCH · FLASK · COMPUTER VISION</span>
+  </footer>
+  <script src="{{ url_for('static', filename='js/site.js') }}"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

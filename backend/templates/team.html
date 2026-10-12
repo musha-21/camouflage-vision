@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Team — Camouflage Vision{% endblock %}
+{% block content %}
+<section class="page-hero compact-hero"><div class="eyebrow">THE PEOPLE BEHIND THE PROJECT / 02</div><h1>Four perspectives.<br><span class="gradient-text">One shared vision.</span></h1><p>Meet the team building an accessible deep-learning experience for camouflaged object segmentation.</p></section>
+<!-- <div class="team-note"><span class="note-icon">✦</span><p><strong>Editable team profiles.</strong> Update names, USNs, roles, initials, and contributions in the <code>TEAM_MEMBERS</code> list near the top of <code>backend/app.py</code>.</p></div> -->
+<section class="team-grid">
+{% for member in members %}
+<article class="team-card tilt-card">
+  <div class="team-card-top"><span class="card-index">TEAM / 0{{ loop.index }}</span><span class="profile-status">CONTRIBUTOR</span></div>
+  <!-- <div class="avatar avatar-{{ loop.index }}"><span>{{ member.initials }}</span><i></i></div> -->
+   <div class="avatar avatar-{{ loop.index }}">
+    <img
+        src="{{ url_for('static', filename='images/team/' ~ member.photo) }}"
+        alt="{{ member.name }}"
+    >
+    <i></i>
+</div>
+  <div class="team-role">{{ member.role }}</div><h2>{{ member.name }}</h2><div class="team-usn">{{ member.usn }}</div>
+  <p>{{ member.contribution }}</p>
+  <div class="team-card-foot"><span>PROJECT CONTRIBUTION</span><span>↗</span></div>
+</article>
+{% endfor %}
+</section> 
+{% endblock %}
