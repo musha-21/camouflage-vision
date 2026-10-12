@@ -33,10 +33,10 @@ CLASS_NAMES = [
 COLORS = np.asarray(config.COLORS, dtype=np.uint8)
 
 TEAM_MEMBERS = [
-    {"name": "SUBIYA ANJUM", "usn": "EDIT-USN-001", "role": "Model Development", "contribution": "Dataset preparation, model training, and segmentation experiments.", "initials": "SA", "photo": "image1.png"},
-    {"name": "SANIYA TAHSEEN", "usn": "EDIT-USN-002", "role": "Backend & Integration", "contribution": "Flask API, model integration, and inference pipeline.", "initials": "ST", "photo": "image2.jpg"},
-    {"name": "SONU", "usn": "EDIT-USN-003", "role": "Frontend & UX", "contribution": "Responsive interface, visualizations, and user experience.", "initials": "S", "photo": "image3.jpg"},
-    {"name": "SUHANA", "usn": "EDIT-USN-004", "role": "Testing & Documentation", "contribution": "Testing, evaluation, documentation, and project validation.", "initials": "S", "photo": "image4.jpg"},
+    {"name": "MUSHARRAF HUSSAIN", "usn": "EDIT-USN-001", "role": "Model Development", "contribution": "Dataset preparation, model training, and segmentation experiments.", "initials": "SA", "photo": "image1.png"},
+    {"name": "NAME2", "usn": "EDIT-USN-002", "role": "Backend & Integration", "contribution": "Flask API, model integration, and inference pipeline.", "initials": "ST", "photo": "image2.jpg"},
+    {"name": "NAME3", "usn": "EDIT-USN-003", "role": "Frontend & UX", "contribution": "Responsive interface, visualizations, and user experience.", "initials": "S", "photo": "image3.jpg"},
+    {"name": "NAME4", "usn": "EDIT-USN-004", "role": "Testing & Documentation", "contribution": "Testing, evaluation, documentation, and project validation.", "initials": "S", "photo": "image4.jpg"},
 ]
 
 model_ready = False
